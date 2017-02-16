@@ -180,7 +180,7 @@ class PersonMailer < ActionMailer::Base
     with_locale(recipient.locale, community.locales.map(&:to_sym), community.id) do
       @listing = listing
       @no_recipient_name = true
-      @author_name = listing.author.name(community)
+      @author_name = PersonViewUtils.person_display_name(listing.author, community)
       @listing_url = listing_url(@url_params.merge({:id => listing.id}))
       @translate_scope = [ :emails, :new_listing_by_followed_person ]
       premailer_mail(:to => recipient.confirmed_notification_emails_to,
